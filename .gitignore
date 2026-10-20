@@ -1,0 +1,72 @@
+# Local configuration
+config/paths.local.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test and tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local datasets
+data/
+datasets/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Results
+/results/
+
+# Ignore model checkpoint files
+*.pt
+*.pth
+*.ckpt
+*.joblib
+*.pkl
+*.safetensors
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating system
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Paper
+paper/
+
+# Ignore all results by default
+results/**
+
+# Keep Markdown reports in experiments 1, 2, and 3
+!results/experiment1/
+!results/experiment1/**/*.md
+!results/experiment2/
+!results/experiment2/**/*.md
+!results/experiment3/
+!results/experiment3/**/*.md
+
+

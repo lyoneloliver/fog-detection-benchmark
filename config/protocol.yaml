@@ -1,0 +1,16 @@
+# Protokol evaluasi bersama.
+# Nilai di berkas ini menentukan apakah hasil antarpengguna dapat dibandingkan.
+# Mengubahnya berarti menjalankan protokol lain, dan hasilnya tidak lagi sebanding.
+
+validasi: "leave-one-subject-out"
+seeds: [0, 1, 2]
+fs_evaluasi_hz: 32          # seluruh prediksi dievaluasi pada laju ini
+pemilihan_ambang: "f1_maksimum_pada_pasien_latih"
+episode:
+  tumpang_tindih_minimum: 0.5
+bootstrap:
+  n_ulangan: 2000
+  tingkat_kepercayaan: 0.95
+uji_berpasangan:
+  metode: "wilcoxon"
+  koreksi: "holm"

@@ -1,0 +1,5 @@
+# Salin berkas ini menjadi config/paths.local.yaml lalu isi jalur di komputer Anda.
+# paths.local.yaml TIDAK ikut masuk git. Isinya berbeda untuk setiap orang.
+figshare: "D:/data/figshare"
+daphnet:  "D:/data/daphnet/dataset_fog_release"
+fogstar:  "D:/data/fogstar"

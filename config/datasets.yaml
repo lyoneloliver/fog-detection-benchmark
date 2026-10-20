@@ -1,0 +1,27 @@
+# Keterangan dataset. Berkas ini SAMA untuk semua orang dan ikut masuk git.
+# Yang berbeda antarorang hanya jalurnya, dan itu ada di paths.local.yaml.
+
+figshare:
+  nama_panjang: "Figshare turning-in-place (De Souza dkk., 2022)"
+  fs_hz: 128
+  satuan_akselerasi: "g"
+  satuan_giroskop: "deg/s"
+  penempatan_sensor: "tulang kering sisi paling terdampak"
+  pola_berkas: "IMU/IMU/SUB*_[0-9].txt"
+  pemisah_kolom: "tab"
+  kolom:
+    akselerasi: [2, 3, 4]
+    giroskop: [5, 6, 7]
+    label_fog: 8
+  n_pasien_diharapkan: 35
+  checksum: "checksums/figshare.sha256"
+
+daphnet:
+  nama_panjang: "Daphnet (Bachlin dkk., 2010)"
+  fs_hz: 64
+  satuan_akselerasi: "mg"
+  giroskop: false
+  penempatan_sensor: "tulang kering, paha, pinggang"
+  pola_berkas: "dataset/S*R*.txt"
+  n_pasien_diharapkan: 10
+  checksum: "checksums/daphnet.sha256"
