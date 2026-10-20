@@ -18,13 +18,7 @@ class FreezeIndex(FoGModel):
         locomotor_band: tuple[float, float] = (0.5, 3.0),
         freeze_band: tuple[float, float] = (3.0, 8.0),
     ):
-        if window_sec <= 0:
-            raise ValueError("window_sec harus lebih dari 0")
-        if step_sec <= 0:
-            raise ValueError("step_sec harus lebih dari 0")
-        if step_sec > window_sec:
-            raise ValueError("step_sec tidak boleh lebih besar dari window_sec")
-
+ 
         self.seed = seed
         self.window_sec = float(window_sec)
         self.step_sec = float(step_sec)
