@@ -133,25 +133,32 @@ def run_loso(
         y_eval = y_eval[:n]
         p_seeds = [q[:n] for q in p_seeds]
 
-        # Threshold tetap dipilih dari pasien latih saja.
         model_t = model_factory(seed=seeds[0], **model_kwargs)
         model_t.fit(train)
 
-        y_tr = np.concatenate([
-            D.to_eval_rate(
-                r.y, r.fs, fs_eval, is_label=True
-            )
-            for r in train
-        ])
-        p_tr = np.concatenate([
-            D.to_eval_rate(
-                model_t.predict_proba(r), r.fs, fs_eval
-            )
-            for r in train
-        ])
+        # Model boleh membawa ambang tetap miliknya sendiri (mis. Freeze Index
+        # klasik). Ambang ini tidak bergantung pada label mana pun.
+        fixed_thr = getattr(model_t, "decision_threshold", None)
 
-        m = min(len(y_tr), len(p_tr))
-        thr = pick_threshold(y_tr[:m], p_tr[:m])
+        if fixed_thr is not None:
+            thr = float(fixed_thr)
+        else:
+            # Threshold tetap dipilih dari pasien latih saja.
+            y_tr = np.concatenate([
+                D.to_eval_rate(
+                    r.y, r.fs, fs_eval, is_label=True
+                )
+                for r in train
+            ])
+            p_tr = np.concatenate([
+                D.to_eval_rate(
+                    model_t.predict_proba(r), r.fs, fs_eval
+                )
+                for r in train
+            ])
+
+            m = min(len(y_tr), len(p_tr))
+            thr = pick_threshold(y_tr[:m], p_tr[:m])
 
         t0 = time.perf_counter()
         _ = model_t.predict_proba(test[0])

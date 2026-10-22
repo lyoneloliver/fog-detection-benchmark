@@ -83,7 +83,7 @@ def validate_fold(rec: dict) -> list[str]:
         err.append("ambang harus berada di antara 0 dan 1")
 
     config = rec.get("experiment_config")
-    if config is not None:
+    if config:
         for key in ("window_sec", "overlap", "step_sec"):
             if key not in config:
                 err.append(f"experiment_config tidak memiliki {key}")

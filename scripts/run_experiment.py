@@ -6,6 +6,9 @@ Contoh LOSO standar:
 
 Contoh dengan 5 pasien latih:
     python scripts/run_experiment.py --model models.random_forest --dataset figshare --train-patients 5
+
+Contoh Eksperimen 3 (modul dengan CONFIGS, semua kombinasi sekaligus):
+    python scripts/run_experiment.py --model "models.experiment 3.freeze_index" --dataset figshare --out results/experiment3
 """
 import argparse
 import importlib
@@ -15,7 +18,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from fogbench import data as D
+from fogbench import schema
 from fogbench.evaluate import protocol, run_loso
+from fogbench.report import table
+from summarize_results import make_markdown
 
 
 def main():
@@ -46,6 +52,12 @@ def main():
         type=int,
         default=None,
         help="Jumlah pasien latih; tanpa argumen ini menggunakan LOSO standar"
+    )
+
+    ap.add_argument(
+        "--resume",
+        action="store_true",
+        help="Lewati fold yang hasilnya sudah ada"
     )
 
     a = ap.parse_args()
@@ -90,21 +102,64 @@ def main():
 
     recs = D.load(a.dataset)
 
-    run_loso(
-        mod.factory,
-        recs,
-        out,
-        name,
-        a.dataset,
-        seeds=seeds,
-        train_patients=a.train_patients,
-    )
+    configs = getattr(mod, "CONFIGS", None)
 
-    print(f"\nSelesai. Hasil tersimpan di: {out}")
-    print(
-        "Validasi hasil: "
-        f"python scripts/validate_results.py {out}"
-    )
+    if not configs:
+        run_loso(
+            mod.factory,
+            recs,
+            out,
+            name,
+            a.dataset,
+            seeds=seeds,
+            train_patients=a.train_patients,
+            resume=a.resume,
+        )
+
+        print(f"\nSelesai. Hasil tersimpan di: {out}")
+        print(
+            "Validasi hasil: "
+            f"python scripts/validate_results.py {out}"
+        )
+        return
+
+    n_subjects = len({r.subject for r in recs})
+    folders = []
+
+    for i, (config_name, config) in enumerate(configs.items(), start=1):
+        config_out = out / config_name
+        print("=" * 60)
+        print(f"Konfigurasi {i}/{len(configs)}: {config_name}")
+        print("=" * 60)
+
+        run_loso(
+            mod.factory,
+            recs,
+            config_out,
+            name,
+            a.dataset,
+            seeds=seeds,
+            model_kwargs=config.get("model_kwargs"),
+            experiment_config=config.get("experiment_config"),
+            train_patients=a.train_patients,
+            resume=a.resume,
+        )
+
+        valid, messages = schema.validate_dir(config_out, n_fold_wajib=n_subjects)
+        if not valid:
+            for message in messages:
+                print(f"  - {message}")
+            sys.exit(f"Hasil {config_name} belum valid.")
+
+        (config_out / "report.md").write_text(
+            make_markdown(config_out), encoding="utf-8"
+        )
+        folders.append(config_out)
+
+    (out / "report_all.md").write_text(table(folders), encoding="utf-8")
+
+    print(f"\nSelesai. {len(folders)} konfigurasi tersimpan di: {out}")
+    print(f"Ringkasan semua konfigurasi: {out / 'report_all.md'}")
 
 
 if __name__ == "__main__":
