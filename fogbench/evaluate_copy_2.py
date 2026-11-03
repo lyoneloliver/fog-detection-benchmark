@@ -29,12 +29,14 @@ def run_loso(model_factory, recordings, out_dir: Path, model_name: str,
 
     for fold in folds:
         train, test = splits.split_recordings(recordings, fold)
-        p_seeds, t_train = [], 0.0
+        p_seeds, t_train, model_t = [], 0.0, None
         for sd in seeds:
             model = model_factory(seed=sd)
             t0 = time.perf_counter()
             model.fit(train)                     # HANYA pasien latih
             t_train += time.perf_counter() - t0
+            if model_t is None:
+                model_t = model                  # model seed pertama dipakai untuk ambang
             p_seeds.append(np.concatenate(
                 [D.to_eval_rate(model.predict_proba(r), r.fs, fs_eval) for r in test]))
         p_mean = np.mean(p_seeds, axis=0)
@@ -44,7 +46,6 @@ def run_loso(model_factory, recordings, out_dir: Path, model_name: str,
         p_seeds = [q[:n] for q in p_seeds]
 
         # ambang dari pasien latih saja
-        model_t = model_factory(seed=seeds[0]); model_t.fit(train)
         y_tr = np.concatenate([D.to_eval_rate(r.y, r.fs, fs_eval, is_label=True) for r in train])
         p_tr = np.concatenate([D.to_eval_rate(model_t.predict_proba(r), r.fs, fs_eval)
                                for r in train])

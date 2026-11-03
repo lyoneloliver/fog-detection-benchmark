@@ -1,14 +1,16 @@
 """Jalankan satu model pada satu dataset dengan protokol resmi.
 
 Pemakaian:
-    python scripts/run_experiment.py --model models.example_logreg --dataset figshare
+    python "scripts/run_experiment copy.py" --model models.example_logreg --dataset figshare
 """
 import argparse, importlib, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from fogbench import data as D
-from fogbench.evaluate import protocol, run_loso
+from fogbench import schema
+from fogbench.evaluate_copy_2 import protocol, run_loso
+from summarize_results import make_markdown
 
 
 def main():
@@ -29,7 +31,17 @@ def main():
     print(f"Model   : {name}\nDataset : {a.dataset}\nSeed    : {seeds}\nKeluaran: {out}\n")
     recs = D.load(a.dataset)
     run_loso(mod.factory, recs, out, name, a.dataset, seeds=seeds)
-    print(f"\nSelesai. Jalankan: python scripts/validate_results.py {out}")
+
+    n_subjects = len({r.subject for r in recs})
+    valid, messages = schema.validate_dir(out, n_fold_wajib=n_subjects)
+    if not valid:
+        for message in messages:
+            print(f"  - {message}")
+        sys.exit(f"Hasil di {out} belum valid, report tidak dibuat.")
+
+    (out / "report.md").write_text(make_markdown(out), encoding="utf-8")
+    print(f"\nSelesai. {n_subjects} fold tersimpan di: {out}")
+    print(f"Report: {out / 'report.md'}")
 
 
 if __name__ == "__main__":

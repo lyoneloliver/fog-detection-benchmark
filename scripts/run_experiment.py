@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from fogbench import data as D
 from fogbench import schema
-from fogbench.evaluate import protocol, run_loso
+from fogbench.evaluate_copy import protocol, run_loso
 from fogbench.report import table
 from summarize_results import make_markdown
 

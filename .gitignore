@@ -58,8 +58,18 @@ Desktop.ini
 # Paper
 paper/
 
-# Ignore all results by default
-results/**
+# Ignore PDF
+FoG (1).pdf
+PANDUAN-TUGAS.pdf
+results/experiment1/perbandingan_paper.md
+
+# Ignore hasil selain Markdown
+/results/**
+!/results/
+!/results/**/
+!/results/**/*.md
+/results/3fold semua
+/results/lama semua
 
 # Keep Markdown reports in experiments 1, 2, and 3
 !results/experiment1/
@@ -68,5 +78,4 @@ results/**
 !results/experiment2/**/*.md
 !results/experiment3/
 !results/experiment3/**/*.md
-
 

@@ -1,0 +1,78 @@
+# Ringkasan hasil: freeze-index
+
+- **Dataset:** figshare
+- **Fold tersedia:** 35
+- **Jumlah parameter:** 0
+- **Total waktu latih:** 0.00 detik
+- **Median waktu inferensi:** 5.80 ms
+
+## Metrik gabungan
+
+| AUROC pooled | AUPRC | Sensitivitas | Spesifisitas | F1 | F1 episode |
+|---:|---:|---:|---:|---:|---:|
+| 0.5536 | 0.2514 | 0.5961 | 0.4768 | 0.3108 | 0.2539 |
+
+## AUROC per pasien
+
+- **Rerata ± SD:** 0.5979 ± 0.1066 (n = 26)
+- **IK bootstrap 95%:** [0.5569, 0.6371]
+
+| Pasien uji | AUROC | AUPRC | Sensitivitas | Spesifisitas | F1 | F1 episode | Waktu Latih (s) | Waktu Inferensi (ms) |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 0.5065 | 0.9616 | 0.7428 | 0.3754 | 0.8408 | 0.3307 | 0.0000 | 5.4656 |
+| 2 | 0.6580 | 0.9505 | 0.7663 | 0.4116 | 0.8357 | 0.6667 | 0.0000 | 6.0490 |
+| 3 | 0.5905 | 0.0086 | 1.0000 | 0.0000 | 0.0148 | 0.0000 | 0.0000 | 11.9692 |
+| 4 | 0.5575 | 0.2734 | 0.8553 | 0.1958 | 0.2551 | 0.0000 | 0.0000 | 5.6885 |
+| 5 | 0.5571 | 0.1386 | 0.3547 | 0.7167 | 0.1786 | 0.2034 | 0.0000 | 5.8727 |
+| 6 | 0.5153 | 0.0091 | 0.4658 | 0.5738 | 0.0203 | 0.0000 | 0.0000 | 5.1244 |
+| 7 | 0.6321 | 0.9913 | 0.8466 | 0.0000 | 0.9105 | 0.5000 | 0.0000 | 5.4707 |
+| 8 | 0.5784 | 0.7899 | 0.5065 | 0.6377 | 0.6047 | 0.5526 | 0.0000 | 5.2899 |
+| 9 | 0.6020 | 0.1169 | 0.4619 | 0.6090 | 0.1662 | 0.1333 | 0.0000 | 5.2130 |
+| 10 | nan | nan | nan | 0.7608 | nan | 0.0000 | 0.0000 | 5.6280 |
+| 11 | 0.6250 | 0.2014 | 0.2421 | 0.7938 | 0.1824 | 0.0000 | 0.0000 | 5.9499 |
+| 12 | nan | nan | nan | 0.5130 | nan | 0.0000 | 0.0000 | 6.3689 |
+| 13 | nan | nan | nan | 0.4706 | nan | 0.0000 | 0.0000 | 5.5500 |
+| 14 | 0.4033 | 0.2111 | 0.6025 | 0.2323 | 0.2929 | 0.0000 | 0.0000 | 5.2744 |
+| 15 | 0.7271 | 0.1991 | 1.0000 | 0.1527 | 0.0753 | 0.0000 | 0.0000 | 6.5599 |
+| 16 | 0.5224 | 0.1589 | 0.7012 | 0.4221 | 0.3010 | 0.0778 | 0.0000 | 5.3697 |
+| 17 | nan | nan | nan | 0.1435 | nan | 0.0000 | 0.0000 | 5.4146 |
+| 18 | 0.6493 | 0.0467 | 0.5354 | 0.6959 | 0.0640 | 0.0000 | 0.0000 | 5.4773 |
+| 19 | 0.7696 | 0.9956 | 0.2236 | 1.0000 | 0.3655 | 0.0000 | 0.0000 | 5.9186 |
+| 20 | 0.7638 | 0.0508 | 0.9725 | 0.4635 | 0.0758 | 0.0000 | 0.0000 | 5.8523 |
+| 21 | 0.4340 | 0.0308 | 0.4167 | 0.6183 | 0.0686 | 0.0571 | 0.0000 | 6.3411 |
+| 22 | nan | nan | nan | 0.4128 | nan | 0.0000 | 0.0000 | 5.3437 |
+| 23 | 0.6648 | 0.1565 | 0.2320 | 0.9310 | 0.1767 | 0.0000 | 0.0000 | 6.0852 |
+| 24 | 0.5790 | 0.2385 | 0.7524 | 0.3242 | 0.3599 | 0.3750 | 0.0000 | 5.2926 |
+| 25 | nan | nan | nan | 0.5023 | nan | 0.0000 | 0.0000 | 6.2564 |
+| 26 | nan | nan | nan | 0.2500 | nan | 0.0000 | 0.0000 | 5.9342 |
+| 27 | 0.5427 | 0.4773 | 0.3033 | 0.8431 | 0.3801 | 0.0000 | 0.0000 | 5.8829 |
+| 28 | nan | nan | nan | 0.3904 | nan | 0.0000 | 0.0000 | 5.4996 |
+| 29 | 0.5235 | 0.4019 | 0.5231 | 0.5680 | 0.4787 | 0.4908 | 0.0000 | 6.3644 |
+| 30 | 0.7418 | 0.5090 | 0.8440 | 0.3865 | 0.4126 | 0.0941 | 0.0000 | 5.8871 |
+| 31 | 0.6866 | 0.1574 | 0.9486 | 0.3186 | 0.1249 | 0.1111 | 0.0000 | 5.6597 |
+| 32 | 0.7174 | 0.0083 | 1.0000 | 0.1055 | 0.0112 | 0.0000 | 0.0000 | 5.3524 |
+| 33 | 0.3626 | 0.2674 | 0.4066 | 0.3827 | 0.3203 | 0.3429 | 0.0000 | 5.8005 |
+| 34 | 0.6345 | 0.3211 | 0.2082 | 0.9011 | 0.2635 | 0.2000 | 0.0000 | 6.1034 |
+| 35 | nan | nan | nan | 0.7210 | nan | 0.0000 | 0.0000 | 6.3090 |
+
+## Kartu metode
+
+### Hiperparameter
+
+- **Window sec:** 2.0
+- **Overlap:** 0.0
+- **Step sec:** 2.0
+- **Locomotor band:** 0.5, 3.0
+- **Freeze band:** 3.0, 8.0
+- **Power axes:** ACC SI (raw6[:, 2])
+- **Score mapping:** FI / (1 + FI)
+- **Threshold:** FI >= 2.3 (skor >= 0.6970)
+- **Deviasi dari metode acuan:**
+  - Durasi jendela diuji pada 1, 2, dan 4 detik.
+  - Jarak antarjendela ditentukan dari overlap 0, 50, dan 75 persen.
+  - Ambang FI tetap 1.47, 2.3, dan 3.0 dipetakan ke skala skor FI / (1 + FI); ambang adaptive dipilih benchmark dari data latih.
+  - Sumbu akselerometer ACC SI digunakan sebagai kanal analisis.
+  - Skor dihitung secara offline dan diinterpolasikan ke setiap sampel.
+  - Threshold tidak menggunakan label pasien uji.
+
+> IK bootstrap dan statistik AUROC per pasien hanya bermakna jika tersedia lebih dari satu pasien dengan kedua kelas label. Pasien tanpa kedua kelas tidak memiliki AUROC/AUPRC dan tidak masuk ringkasan per pasien.
