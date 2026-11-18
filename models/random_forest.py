@@ -347,6 +347,8 @@ class RandomForestFoG(FoGModel):
                 "Paper menggunakan Decision Tree untuk ranking fitur dan SVM untuk klasifikasi. Sesuai permintaan, Random Forest menggantikan SVM dan memakai fitur dengan importance positif dari Decision Tree yang dilatih hanya pada data latih. Pohon seleksi diberi class weight agar fitur kelas FoG yang minoritas tidak mudah terabaikan.",
                 "Validasi mengikuti LOSO benchmark, bukan prosedur repeated random holdout dan tuning internal 10-fold dalam paper.",
                 "Class weighting dipakai untuk membantu ketidakseimbangan kelas; parameter Random Forest tidak dituning dengan prosedur Bayesian paper.",
+                "Hanya satu kanal (GYR ML) yang dipakai untuk segmentasi langkah dan seluruh fitur; sinyal giroskop dinormalisasi per rekaman (dikurangi mean, dibagi rentang) tanpa memakai label.",
+                "n_parameter berisi jumlah pohon Random Forest, bukan jumlah parameter terlatih, sehingga tidak sebanding dengan jumlah parameter model deep learning.",
             ],
         }
 

@@ -103,10 +103,11 @@ class TCNYang2024RotationAugmentation(TCNYang2024):
         result["deviasi"] = [
             "Li et al. (2020) mengusulkan augmentasi rotasi arbitrer untuk menyeimbangkan sampel FoG, tetapi arsitektur paper adalah SEC-ALSTM, bukan TCN; model ini memakai initial-prediction dan refinement MS-TCN Yang et al. (2024).",
             "Paper Li memakai Daphnet dengan sembilan kanal akselerometer; Figshare menyediakan satu IMU dengan enam kanal; rotasi diterapkan pada triad akselerometer Figshare, bukan kanal giroskop.",
-            "Pembentukan sampel mengikuti antarmuka prediksi per-sampel TCN benchmark, bukan segmentasi 256-frame dengan langkah 4 yang dipakai pada eksperimen Li.",
+            "Initial TCN dilatih dengan satu window 256 sampel yang berpusat pada setiap sampel latih (langkah 1 sampel, zero-padding di tepi) dan loss hanya pada keluaran titik tengah, bukan segmentasi 256-frame dengan langkah 4 seperti eksperimen Li.",
+            "Cara pelatihan initial TCN ini berbeda dari TCN tanpa augmentasi (pelabelan sekuens per potongan rekaman), sehingga selisih performa TCN vs TCN-augmentasi tidak dapat diatribusikan hanya pada augmentasi rotasi.",
             "Augmentasi rotasi diterapkan pada training initial TCN; refinement tetap dilatih pada recording asli agar target temporal dan kontinuitas sinyal tidak berubah.",
-            "Evaluasi mengikuti LOSO Figshare dan protokol threshold benchmark, bukan evaluasi Daphnet Li."
-
+            "Evaluasi mengikuti LOSO Figshare dan protokol threshold benchmark, bukan evaluasi Daphnet Li.",
+            "Threshold dipilih runner benchmark dengan F1 maksimum dari prediksi model seed 0 pada seluruh pasien latih (in-sample); prediksi pasien validasi internal tidak dipakai. Pasien uji LOSO tidak digunakan untuk pemilihan threshold."
         ]
         return result
 

@@ -55,13 +55,12 @@ Desktop.ini
 *.tmp
 *.temp
 
-# Paper
-paper/
+# Referensi (PDF paper dan dokumen tugas)
+references/
 
 # Ignore PDF
-FoG (1).pdf
-PANDUAN-TUGAS.pdf
 results/experiment1/perbandingan_paper.md
+PDFEinfo.csv
 
 # Ignore hasil selain Markdown
 /results/**
@@ -78,4 +77,11 @@ results/experiment1/perbandingan_paper.md
 !results/experiment2/**/*.md
 !results/experiment3/
 !results/experiment3/**/*.md
+
+
+# Folder local
+/research_audit/
+/manuscript/
+/results/_arsip/
+/kurva_pasien/kurva.ipynb
 

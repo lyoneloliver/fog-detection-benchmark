@@ -475,11 +475,11 @@ class CNNBiLSTMAttention(FoGModel):
             "deviasi": [
                 "Paper memakai sembilan kanal akselerometer Daphnet dari tiga posisi sensor. Figshare menyediakan enam kanal akselerometer dan giroskop dari satu sensor tulang kering; semua enam kanal digunakan dan di-resample ke 64 Hz.",
                 "Label Figshare hanya biner FoG/tidak-FoG, bukan tiga kelas Daphnet. Label window mengikuti mayoritas sampel di dalam window.",
-                "Outlier ditangani dengan median dan ambang empat simpangan baku; augmentasi rotasi arbitrer diterapkan pada triad akselerometer window FoG hanya ketika FoG menjadi kelas minoritas.",
+                "Tidak ada penanganan outlier. Augmentasi rotasi arbitrer diterapkan pada salinan window FoG (diambil dengan pengembalian hingga jumlah kelas seimbang) hanya ketika FoG menjadi kelas minoritas; rotasi hanya mengenai triad akselerometer, sedangkan kanal giroskop tidak dirotasi sehingga salinan sintetis tidak konsisten secara fisik.",
                 "Normalisasi z-score memakai statistik rekaman latih saja untuk menangani perbedaan satuan akselerometer dan giroskop di Figshare.",
                 "Paper mengevaluasi Daphnet; hasil Figshare dengan konfigurasi ini merupakan adaptasi, bukan replikasi angka paper.",
                 "BiLSTM memakai dua arah secara eksplisit; attention diterapkan pada seluruh keluaran temporal dengan query gabungan state akhir arah maju dan mundur.",
-                "Threshold dipilih dari prediksi subjek validasi internal yang tidak dipakai untuk pembaruan bobot; jika validasi tidak tersedia karena hanya ada satu subjek latih, runner memakai fallback standarnya."
+                "Threshold dipilih runner benchmark dengan F1 maksimum dari prediksi model seed 0 pada seluruh pasien latih (in-sample); prediksi pasien validasi internal tidak dipakai. Pasien uji LOSO tidak digunakan untuk pemilihan threshold."
             ],
         }
 

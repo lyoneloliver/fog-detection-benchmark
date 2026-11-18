@@ -549,7 +549,8 @@ class SpectralTransformer(FoGModel):
                 "Window dilabeli positif jika FoG >50%, negatif jika 0%, dan window campuran dibuang.",
                 "Normalisasi min-max ke rentang [-1, 1] dihitung murni dari data training untuk mencegah kebocoran data.",
                 "Loss training menggunakan pos_weight berdasarkan rasio kelas untuk mengatasi ketidakseimbangan data.",
-                "Early stopping dan pemilihan threshold divalidasi pada subjek internal agar set uji LOSO tidak tercemar.",
+                "Early stopping memakai 20% subjek latih sebagai validasi internal agar set uji LOSO tidak tercemar.",
+                "Threshold dipilih runner benchmark dengan F1 maksimum dari prediksi model seed 0 pada seluruh pasien latih (in-sample); prediksi pasien validasi internal tidak dipakai. Pasien uji LOSO tidak digunakan untuk pemilihan threshold.",
                 "Runner benchmark memakai rentang threshold 0.01-0.99 (paper 0.2-0.8) demi kompatibilitas sistem.",
                 "Implementasi memakai padding valid sesuai default Conv1D Keras yang dirujuk paper.",
                 "Probabilitas level-window diproyeksikan dan dirata-ratakan pada area overlap untuk memenuhi antarmuka sampel benchmark."

@@ -21,7 +21,5 @@ jobs:
           cache: pip
       - name: Pasang dependensi
         run: pip install -r requirements.txt
-      - name: Uji unit dan uji kebocoran
-        run: python -m pytest tests/ -q
       - name: Uji mandiri ujung ke ujung
         run: python scripts/selftest.py

@@ -126,6 +126,8 @@ class FreezeIndex(FoGModel):
                 "Durasi jendela diuji pada 1, 2, dan 4 detik.",
                 "Jarak antarjendela ditentukan dari overlap 0, 50, dan 75 persen.",
                 "Ambang FI tetap 1.47, 2.3, dan 3.0 dipetakan ke skala skor FI / (1 + FI); ambang adaptive dipilih benchmark dari data latih.",
+                "Sumber ambang tetap: 2.3 = ambang global Moore et al. (2008), 3.0 = ambang global Moore et al. (2013), 1.47 = ambang global Zach et al. (2015), dirangkum dalam Tabel 1 Schaer et al. (2025).",
+                "Ketiga ambang diterapkan langsung pada rasio daya biasa P_freeze / P_loco. Di paper asal skalanya berbeda (Moore 2008 memakai normalisasi ln(100 * rasio^2); Moore 2013 memakai rasio kuadrat luas; skala Zach tidak dirinci), sehingga nilai ambang tidak setara langsung dengan paper asal.",
                 "Sumbu akselerometer ACC SI digunakan sebagai kanal analisis.",
                 "Skor dihitung secara offline dan diinterpolasikan ke setiap sampel.",
                 "Threshold tidak menggunakan label pasien uji.",

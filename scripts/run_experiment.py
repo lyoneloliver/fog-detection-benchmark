@@ -8,7 +8,7 @@ Contoh dengan 5 pasien latih:
     python scripts/run_experiment.py --model models.random_forest --dataset figshare --train-patients 5
 
 Contoh Eksperimen 3 (modul dengan CONFIGS, semua kombinasi sekaligus):
-    python scripts/run_experiment.py --model "models.experiment 3.freeze_index" --dataset figshare --out results/experiment3
+    python scripts/run_experiment.py --model models.freeze_index3 --dataset figshare --out results/experiment3
 """
 import argparse
 import importlib
@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from fogbench import data as D
 from fogbench import schema
-from fogbench.evaluate_copy import protocol, run_loso
+from fogbench.evaluate import protocol, run_loso
 from fogbench.report import table
 from summarize_results import make_markdown
 

@@ -98,5 +98,3 @@
   - Class-weighted cross entropy dipertahankan seperti model benchmark lain; setelah augmentasi noise jumlah kelas seimbang sehingga bobot kelas latih praktis bernilai satu.
   - Paper mengeluarkan lima subjek karena kualitas video buruk; karena video tidak dipakai, seluruh 35 pasien Figshare dievaluasi dengan LOSO benchmark. Hasil ini adaptasi IMU-saja, bukan replikasi angka paper.
   - Prediksi window 1 detik dikembalikan ke resolusi per sampel dengan interpolasi linear antar-titik tengah window agar sesuai antarmuka benchmark.
-
-> IK bootstrap dan statistik AUROC per pasien hanya bermakna jika tersedia lebih dari satu pasien dengan kedua kelas label. Pasien tanpa kedua kelas tidak memiliki AUROC/AUPRC dan tidak masuk ringkasan per pasien.

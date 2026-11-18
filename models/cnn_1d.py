@@ -513,14 +513,17 @@ class CNN1DOday2022(FoGModel):
                 "patience": self.patience,
                 "seed": self.seed,
                 "final_refit": "all outer-training subjects for selected epoch count",
-                "threshold_calibration": "held-out inner-training subjects",
+                "threshold_calibration": "runner benchmark: F1 maksimum pada prediksi in-sample model seed 0 untuk seluruh pasien latih",
             },
             "deviasi": [
                 "Dataset Figshare menggunakan satu lokasi sensor tibia, sedangkan paper O'Day et al. mengevaluasi berbagai kombinasi lokasi IMU (hingga 11 sensor)",
-                "Arsitektur CNN 1D mempertahankan dua blok konvolusi-pooling (16 filter, kernel 17), dropout 0.5, dan fully connected layer sesuai paper.",
+                "Arsitektur CNN 1D memakai dua blok konvolusi-pooling (16 filter, kernel 17), dropout 0.5, dan fully connected layer. Tidak ada fungsi aktivasi setelah kedua lapisan konvolusi (ReLU hanya ada di fully connected layer), sehingga blok konvolusinya linear; kesesuaian bagian ini dengan kode asli paper belum diverifikasi.",
                 "Sinyal di-resample ke 64 Hz untuk kebutuhan benchmark (data asli paper dikoleksi pada 128 Hz).",
-                "Penambahan pembobotan sampel kelas (class weighting) untuk menangani ketimpangan kelas pada dataset Figshare[.",
-                "Validasi internal dan early stopping diterapkan pada subjek latih terpisah untuk mencegah kebocoran data pada pasien uji LOSO."
+                "Setiap window latih diganti (bukan ditambah) dengan salinan yang dirotasi oleh matriks rotasi 3D acak (triad akselerometer dan giroskop dengan matriks yang sama), termasuk saat refit akhir; model tidak pernah melihat orientasi asli. Paper merotasi terhadap sumbu IMU tertentu.",
+                "Normalisasi z-score memakai mean dan simpangan baku global per kanal dari subjek latih, bukan normalisasi per window.",
+                "Penambahan pembobotan sampel kelas (class weighting) untuk menangani ketimpangan kelas pada dataset Figshare.",
+                "Validasi internal dan early stopping diterapkan pada subjek latih terpisah untuk mencegah kebocoran data pada pasien uji LOSO; setelah itu model di-refit pada seluruh subjek latih dengan jumlah epoch terpilih.",
+                "Threshold dipilih runner benchmark dengan F1 maksimum dari prediksi model seed 0 pada seluruh pasien latih (in-sample); prediksi pasien validasi internal tidak dipakai. Pasien uji LOSO tidak digunakan untuk pemilihan threshold."
             ],
         }
 

@@ -536,11 +536,7 @@ class TCNYang2024(FoGModel):
                 "refinement_batch_size": 1,
                 "refinement_loss": "weighted cross-entropy + smoothing (tau=4, lambda=0.15)",
                 "refinement_epochs_trained": self.refinement_epochs_trained,
-                "threshold_calibration": (
-                    "held-out training subjects"
-                    if self._threshold_data
-                    else "runner fallback when no validation subject exists"
-                ),
+                "threshold_calibration": "runner benchmark: F1 maksimum pada prediksi in-sample model seed 0 untuk seluruh pasien latih",
             },
             "deviasi": [
                 "Paper menggunakan lima IMU (30 kanal); adaptasi ini hanya memakai satu IMU tibia (6 kanal) sesuai ketersediaan kanal Figshare.",
@@ -548,7 +544,9 @@ class TCNYang2024(FoGModel):
                 "Model disesuaikan untuk mengembalikan probabilitas biner per sampel sesuai spesifikasi antarmuka benchmark.",
                 "Jumlah epoch pelatihan diturunkan menjadi 15 untuk initial TCN dan 15 untuk refiner agar komputasi CPU lebih efisien.",
                 "Evaluasi mengikuti kerangka LOSO benchmark, bukan partisi dan evaluasi spesifik dari paper.",
-                "Threshold dikalibrasi dari subjek validasi internal data latih, terpisah dari subjek uji LOSO."
+                "Sekitar 20% subjek latih disisihkan sebagai validasi internal tetapi tidak dipakai untuk early stopping maupun threshold, sehingga model hanya dilatih pada sekitar 80% subjek latih.",
+                "Refiner dilatih pada prediksi in-sample initial TCN untuk rekaman latih (dua tahap terpisah, bukan pelatihan bersama).",
+                "Threshold dipilih runner benchmark dengan F1 maksimum dari prediksi model seed 0 pada seluruh pasien latih (in-sample); prediksi pasien validasi internal tidak dipakai. Pasien uji LOSO tidak digunakan untuk pemilihan threshold."
             ],
         }
 

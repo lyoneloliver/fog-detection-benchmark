@@ -75,4 +75,3 @@
   - Skor dihitung secara offline dan diinterpolasikan ke setiap sampel.
   - Threshold tidak menggunakan label pasien uji.
 
-> IK bootstrap dan statistik AUROC per pasien hanya bermakna jika tersedia lebih dari satu pasien dengan kedua kelas label. Pasien tanpa kedua kelas tidak memiliki AUROC/AUPRC dan tidak masuk ringkasan per pasien.
